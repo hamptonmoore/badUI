@@ -1,0 +1,46 @@
+<style>
+body {
+	width: 100%;
+	margin: auto;
+	margin-top:20px;
+	max-width: 500px;
+}
+
+input {
+	height: 3em;
+}
+
+button {
+	height: 3em;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+<h1 id="message">Your input is based on the time it takes to ping the ip you provide. The value is modulo'd with 27, 1-26 result in A-Z and 0 results in a space</h1>
+<input type="text" id="host" style="width:30%" value="8.8.8.8"><button id="ping" type="button" style="width:70%">Ping</button>
+<input type="text" id="keyboard" disabled style="width:100%;margin-top:8px;" placeholder="output is empty">
+
+<p>This badui was made with ❤️ by <a href="https://hampton.pw">Hampton Moore</a></p>
+
+<script>
+
+	let button = document.getElementById("ping");
+	let host = document.getElementById("host");
+	let keyboard = document.getElementById("keyboard");
+
+	button.onclick = function(){
+		axios.get('/type/'+host.value)
+		.then(function(response){
+			keyboard.value += response.data;
+		})
+	}
+
+axios.get('http://10.0.0.1:3000/request')
+  .then(function (response) {
+    document.getElementById("message").innerHTML = response.data;
+    subnet = response.data.split(".")[2];
+  });
+
+
+</script>
