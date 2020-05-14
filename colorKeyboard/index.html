@@ -18,9 +18,11 @@ button {
 
 </style>
 <title>Color Keyboard</title>
-<h1 id="message">Select a color, the first letter of the closest CSS color will be typed.</h1>
+<h1 id="message">Select a color, the first letter of the closest <a href="https://www.w3schools.com/cssref/css_colors.asp">CSS color</a> will be typed.</h1>
 <input type="color" id="hex" style="width:30%" value="#ffffff"><button id="ping" type="button" style="width:70%">Convert</button>
 <input type="text" id="keyboard" disabled style="width:100%;margin-top:8px;" placeholder="output is empty">
+
+<div id="colors">Colors used: </div>
 
 <p>This badui was made with ❤️ by <a href="https://hampton.pw">Hampton Moore</a> | <a href="https://github.com/hamptonmoore/badUI/tree/master/colorKeyboard">Source</a> | <a href="https://www.reddit.com/user/CrazyGamer313">Suggested by u/CrazyGamer313</a></p>
 
@@ -28,9 +30,12 @@ button {
 let button = document.getElementById("ping");
 let hex = document.getElementById("hex");
 let keyboard = document.getElementById("keyboard");
+let colorsUsed = document.getElementById("colors");
 
 button.onclick = function(){
-	keyboard.value += findClosestColor(hex.value).charAt(0);
+	let color = findClosestColor(hex.value);
+	colorsUsed.innerHTML += color + ", ";
+	keyboard.value += color.charAt(0);
 }
 
 var colors = {
